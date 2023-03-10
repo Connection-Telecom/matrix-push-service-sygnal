@@ -1,11 +1,3 @@
-# Dockerfile to build the matrixdotorg/sygnal docker images.
-#
-# To build the image, run `docker build` command from the root of the
-# sygnal repository:
-#
-#    docker build -f docker/Dockerfile .
-#
-
 ###
 ### Stage 0: builder
 ###
@@ -27,8 +19,9 @@ RUN pip install --prefix="/install" --no-warn-script-location /sygnal
 
 FROM python:3.7-slim
 COPY --from=builder /install /usr/local
-COPY --from=builder /sygnal/sygnal.yaml /usr/local/sygnal.yaml
+# DBo: mount this from configmap...
+#COPY --from=builder /sygnal/sygnal.yaml /usr/local/sygnal.yaml
 
-# EXPOSE 5000/tcp
+EXPOSE 6100/tcp
 
 ENTRYPOINT ["python", "-m", "sygnal.sygnal"]

@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  container_sygnal:
+    container_name: container_sygnal
+    environment:
+      SYGNAL_CONF: /usr/local/sygnal.yaml
+    build: 
+      context: ./
+      dockerfile: docker/Dockerfile
+    ports:
+      - "6100:6100"

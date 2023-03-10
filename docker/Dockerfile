@@ -27,7 +27,8 @@ RUN pip install --prefix="/install" --no-warn-script-location /sygnal
 
 FROM python:3.7-slim
 COPY --from=builder /install /usr/local
+COPY --from=builder /sygnal/sygnal.yaml /usr/local/sygnal.yaml
 
-EXPOSE 5000/tcp
+# EXPOSE 5000/tcp
 
 ENTRYPOINT ["python", "-m", "sygnal.sygnal"]

@@ -29,8 +29,6 @@ spec:
             requests:
               cpu: 400m
               memory: 512Mi
-        - name: build-python-unittest
-          resources: {}
         - name: check-registry
           resources: {}
         - name: build-container-build

@@ -60,7 +60,7 @@ spec:
         - name: API_KEY
           valueFrom:
             secretKeyRef:
-              name: matrix-push
+              name: matrix_push
               key: API_KEY
         - name: VERSION
           value: {{ .Chart.Version }}

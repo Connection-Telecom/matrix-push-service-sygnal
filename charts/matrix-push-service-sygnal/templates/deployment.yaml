@@ -38,11 +38,30 @@ spec:
       serviceAccountName: {{ template "fullname" . }}
 {{- end }}
 {{- end }}
+      volumes:
+        - name: config
+          configMap:
+            name: matrix-push
+            items:
+              - key: sygnal.yaml
+                path: sygnal.yaml
+            defaultMode: 420
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+          - name: config
+            readOnly: true
+            mountPath: /config
         env:
+        - name: SYGNAL_CONF
+          value: /config/sygnal.yaml
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: matrix-push
+              key: API_KEY
         - name: VERSION
           value: {{ .Chart.Version }}
 {{- range $pkey, $pval := .Values.env }}

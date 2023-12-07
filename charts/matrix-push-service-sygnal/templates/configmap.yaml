@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: matrix-push
+data:
+  sygnal.yaml: |-
+    log:
+      setup:
+        version: 1
+        formatters:
+          normal:
+            format: "%(asctime)s [%(process)d] %(levelname)-5s %(name)s %(message)s"
+        handlers:
+          stderr:
+            class: "logging.StreamHandler"
+            formatter: "normal"
+            stream: "ext://sys.stderr"
+          stdout:
+            class: "logging.StreamHandler"
+            formatter: "normal"
+            stream: "ext://sys.stdout"
+          file:
+            class: "logging.handlers.WatchedFileHandler"
+            formatter: "normal"
+            filename: "./sygnal.log"
+        loggers:
+          sygnal.access:
+            propagate: false
+            handlers: ["stdout"]
+            level: "INFO"
+          sygnal:
+            propagate: false
+            handlers: ["stderr", "file"]
+        root:
+          handlers: ["stderr"]
+          level: "INFO"
+        disable_existing_loggers: false
+      access:
+        x_forwarded_for: false
+    http:
+      bind_addresses: ['0.0.0.0']
+      port: 6100
+    metrics:
+      prometheus:
+        enabled: false
+        address: '0.0.0.0'
+        port: 8000
+      opentracing:
+        enabled: false
+        implementation: jaeger
+        service_name: sygnal
+        jaeger:
+          sampler:
+            type: 'const'
+            param: 1
+          logging: true
+      sentry:
+        enabled: false
+    apps:
+      com.connectiontelecom.telvivaconnect:
+        type: gcm
+        api_key: ${API_KEY}
+        fcm_options:
+            content_available: true
+            mutable_content: true

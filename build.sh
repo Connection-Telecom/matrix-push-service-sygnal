@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Update this TAG for each new build...
-TAG=0.1
+TAG=0.2
 
 PREFIX=registry.telviva.com:5000
 IMAGE=matrix-push-service

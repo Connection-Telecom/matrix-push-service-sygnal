@@ -74,15 +74,34 @@ For either type, it can accept:
   Valid values are 'production' or 'sandbox'. If not provided, 'production' is used.
 - the `push_type` parameter which determines what value for the `apns-push-type` header is sent to
   APNs. If not provided, the header is not sent.
+- the `convert_device_token_to_hex` parameter which determines if the
+  token provided from the client is b64 decoded and converted to
+  hex. Some client libraries already provide the token in hex, and
+  this should be set to `False` if so.
 
 ### gcm
 
 This sends messages via Google/Firebase Cloud Messaging (GCM/FCM)
-and hence can be used to deliver notifications to Android apps. It
-expects the 'api_key' parameter to contain the 'Server key',
-which can be acquired from Firebase Console at:
-`https://console.firebase.google.com/project/<PROJECT NAME>/settings/cloudmessaging/`
+and hence can be used to deliver notifications to Android apps.
 
+The expected configuration depends on which version of the firebase api you
+wish to use.
+
+For legacy API, it expects:
+
+- the `api_key` parameter to contain the `Server key`,
+  which can be acquired from Firebase Console at:
+  `https://console.firebase.google.com/project/<PROJECT NAME>/settings/cloudmessaging/`
+    
+For API v1, it expects:
+
+- the `api_version` parameter to contain `v1`
+- the `project_id` parameter to contain the `Project ID`,
+  which can be acquired from Firebase Console at:
+  `https://console.cloud.google.com/project/<PROJECT NAME>/settings/general/`
+- the `service_account_file` parameter to contain the path to the service account file,
+  which can be acquired from Firebase Console at:
+  `https://console.firebase.google.com/project/<PROJECT NAME>/settings/serviceaccounts/adminsdk`
 
 Using an HTTP Proxy for outbound traffic
 ----------------------------------------
@@ -133,7 +152,7 @@ With custom configuration file name:
 SYGNAL_CONF=/path/to/custom_sygnal.conf python -m sygnal.sygnal
 ```
 
-Python 3.7 or higher is required.
+Python 3.8 or higher is required.
 
 
 Log Rotation

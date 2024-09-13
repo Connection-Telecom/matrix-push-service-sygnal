@@ -1,3 +1,116 @@
+# Sygnal 0.15.0 (2024-06-26)
+
+**NOTE**: Exercise caution when installing over an existing sygnal installation via pip. The
+sygnal package name was inadvertently changed to `sygnal` during the change to use poetry in v0.14.2.
+Release v0.15.0 changes the package name back to `matrix-sygnal`, which is what it was prior to v0.14.2.
+
+### Bugfixes
+
+- Change package name back to matrix-sygnal. ([\#385](https://github.com/matrix-org/sygnal/issues/385))
+
+
+# Sygnal 0.14.4 (2024-06-26)
+
+### Bugfixes
+
+- Truncate large values inside of Firebase notification content fields. ([\#386](https://github.com/matrix-org/sygnal/issues/386))
+- Fixes an issue where retry attempts using the Firebase v1 API would fail due to nested `messages`. ([\#387](https://github.com/matrix-org/sygnal/issues/387))
+
+### Internal Changes
+
+- Bump `tornado` from 6.4 to 6.4.1. ([\#382](https://github.com/matrix-org/sygnal/issues/382))
+
+
+# Sygnal 0.14.3 (2024-05-31)
+
+### Bugfixes
+
+- Don't delete android notification options specified in config when using Firebase v1 API. ([\#380](https://github.com/matrix-org/sygnal/issues/380))
+
+### Internal Changes
+
+- Fix tests to allow Twisted versions >=23.10. ([\#381](https://github.com/matrix-org/sygnal/issues/381))
+
+
+# Sygnal 0.14.2 (2024-05-21)
+
+### Bugfixes
+
+- FCM v1: use async version of google-auth and add HTTP proxy support. ([\#372](https://github.com/matrix-org/sygnal/issues/372))
+
+### Improved Documentation
+
+- Update docs & tests to reflect APNs usage in FCM v1 API. ([\#370](https://github.com/matrix-org/sygnal/issues/370))
+
+### Internal Changes
+
+- Update docker build and CI workflows to Python 3.11. ([\#373](https://github.com/matrix-org/sygnal/issues/373))
+- Switch over to use poetry & add lock file to version control. ([\#374](https://github.com/matrix-org/sygnal/issues/374))
+- Add manual proxy testing scripts & docs. ([\#375](https://github.com/matrix-org/sygnal/issues/375))
+- Bump `black` from 23.9.1 to 24.3.0. ([\#376](https://github.com/matrix-org/sygnal/issues/376))
+- Bump `requests` from 2.31.0 to 2.32.2. ([\#377](https://github.com/matrix-org/sygnal/issues/377))
+
+
+# Sygnal 0.14.1 (2024-04-09)
+
+### Bugfixes
+
+- Fix a bug causing Sygnal to fail when processing notifications without a `content` dict, when those notifications were destined for GCM. Contributed by @c-cal. ([\#362](https://github.com/matrix-org/sygnal/issues/362))
+
+
+# Sygnal 0.14.0 (2024-03-21)
+
+### Features
+
+- Add a new `convert_device_token_to_hex` configuration option for APNs apps, to allow disabling the conversion of device tokens from base64 to hex. ([\#344](https://github.com/matrix-org/sygnal/issues/344))
+- Adds the ability to use the new FCM v1 API. ([\#361](https://github.com/matrix-org/sygnal/issues/361))
+
+### Bugfixes
+
+- Fixed an issue which resulted in proxy configuration being ignored for APNs notifications. ([\#360](https://github.com/matrix-org/sygnal/issues/360))
+
+
+# Sygnal 0.13.0 (2023-11-21)
+
+Sygnal will soon be forked by Element under an AGPLv3.0 licence (with CLA, for
+proprietary dual licensing). You can read more about this here:
+
+- https://matrix.org/blog/2023/11/06/future-of-synapse-dendrite/
+- https://element.io/blog/element-to-adopt-agplv3/
+
+The Matrix.org Foundation copy of the project will be archived. Any changes needed
+by server administrators will be communicated via our usual announcements channels,
+but we are striving to make this as seamless as possible.
+
+### Features
+
+- Set log level for `/health` endpoint to `DEBUG`. ([\#352](https://github.com/matrix-org/sygnal/issues/352))
+
+### Bugfixes
+
+- Fix a bug introduced in Sygnal 0.5.0 where `sygnal.__version__` would not be correctly populated. ([\#355](https://github.com/matrix-org/sygnal/issues/355))
+
+### Improved Documentation
+
+- Update outdated links in `README.md`. ([\#316](https://github.com/matrix-org/sygnal/issues/316))
+- Change `master` to `main` branch in `CONTRIBUTING.md`. ([\#317](https://github.com/matrix-org/sygnal/issues/317))
+
+### Deprecations and Removals
+
+- Remove support for Python 3.7. ([\#343](https://github.com/matrix-org/sygnal/issues/343))
+
+### Internal Changes
+
+- Don't attempt delivery of notification if we have rejected pushkey. ([\#315](https://github.com/matrix-org/sygnal/issues/315))
+- Improve static type checking. ([\#333](https://github.com/matrix-org/sygnal/issues/333), [\#336](https://github.com/matrix-org/sygnal/issues/336))
+- Extend logging for outgoing pushes. ([\#334](https://github.com/matrix-org/sygnal/issues/334))
+- Move from setup.py to pyproject.toml. ([\#335](https://github.com/matrix-org/sygnal/issues/335))
+- Add entrypoint to allow running Sygnal by running the `sygnal` script. ([\#341](https://github.com/matrix-org/sygnal/issues/341))
+- Bump aioapns dependency to 3.0 in order to support Python 3.10+. ([\#347](https://github.com/matrix-org/sygnal/issues/347))
+- Bump `matrix-common` dependency to `1.3.0`. ([\#348](https://github.com/matrix-org/sygnal/issues/348))
+- Bump development dependencies. ([\#349](https://github.com/matrix-org/sygnal/issues/349))
+
+
 Sygnal 0.12.0 (2022-07-04)
 ==========================
 
